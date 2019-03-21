@@ -11,7 +11,7 @@ static GLOBAL_THREAD_COUNT: AtomicUsize = ATOMIC_USIZE_INIT;
 
 fn main() {
 
-    let num_runs: i128 = std::i16::MAX as i128;
+    let num_runs: i128 = std::i32::MAX as i128;
     let max_number: i128 = std::i128::MAX;
     // let mut co_primes: i128 = 0;
     // let co_primes = Arc::new(Mutex::new(0));
@@ -27,16 +27,22 @@ fn main() {
         GLOBAL_THREAD_COUNT.fetch_add(1, Ordering::SeqCst);
         let co_primes = Arc::clone(&co_primes);
         let handle = thread::spawn(move || {
+            let mut these_co_primes = 0;
             for _x in 0..num_runs/((threads) as i128) {
+
                 let num_1: i128 = rand::thread_rng().gen_range(1, max_number);
                 let num_2: i128 = rand::thread_rng().gen_range(1, max_number);
                 if num_1.gcd(&num_2) == 1 {
                     // println!("{}-th thread reporting", i);
-                    let mut num = co_primes.lock().unwrap();
-                    *num +=1;
+            
                     // println!("{}", (_x as f64 / ((num_runs as f64) / ((threads) as f64))) * 100.0)
+                    these_co_primes += 1;
                 }
             }
+            let mut num = co_primes.lock().unwrap();
+            *num += these_co_primes;
+
+            
             GLOBAL_THREAD_COUNT.fetch_sub(1, Ordering::SeqCst);
         });
         handles.push(handle);
