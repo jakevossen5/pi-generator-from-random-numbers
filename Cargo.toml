@@ -1,0 +1,12 @@
+[package]
+name = "pi-generator-from-random-numbers"
+version = "0.1.0"
+authors = ["= <jake@vossen.dev>"]
+edition = "2018"
+
+[dependencies]
+rand = "0.6.5"
+num = "0.2.0"
+[[bin]]
+name = "pi-generator-from-random-numbers"
+path = "main.rs"
