@@ -9,5 +9,5 @@ decrease the number of trials.
 This was inspired by [[https://youtu.be/RZBhSi_PwHU][this]] video by Matt Parker.
 
 If you like this, you might also be interested in my
-[[https://github.com/jakevossen5/pi-generator-from-blocks][pi-generator-from-blocks]] repository, where I calculate pi using
+[[https://github.com/jakevossen5/pi-generator-from-blocks][pi-generator-from-blocks]] repository, where I calculate Pi using
 elastic collisions.
