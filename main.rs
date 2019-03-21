@@ -33,6 +33,7 @@ fn main() {
                     // println!("{}-th thread reporting", i);
                     let mut num = counter.lock().unwrap();
                     *num +=1;
+                    // println!("{}", (_x as f64 / ((num_runs as f64) / ((threads) as f64))) * 100.0)
                 }
             }
             GLOBAL_THREAD_COUNT.fetch_sub(1, Ordering::SeqCst);
