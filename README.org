@@ -1,3 +1,13 @@
-# pi-generator-from-random-numbers
+#+TITLE: pi-generator-from-random-numbers
 
-This program generates random numbers, and
+This program generates random numbers, and calculates Pi based off the
+odds that those two numbers are [[Generates Pi from random numbers and co-primes][co-prime]]. This was mostly just an
+excuse for me to learn concurrency in Rust, which I was fairly
+successful with. Change the ~num_runs~ variable to increase or
+decrease the number of trials.
+
+This was inspired by [[https://youtu.be/RZBhSi_PwHU][this]] video by Matt Parker.
+
+If you like this, you might also be interested in my
+[[https://github.com/jakevossen5/pi-generator-from-blocks][pi-generator-from-blocks]] repository, where I calculate pi using
+elastic collisions.
