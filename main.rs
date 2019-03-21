@@ -5,34 +5,44 @@ use std::sync::{Mutex, Arc};
 use num::Integer;
 use rand::Rng;
 use std::thread;
+use std::sync::atomic::{AtomicUsize, Ordering, ATOMIC_USIZE_INIT};
+use std::time::Duration;
+static GLOBAL_THREAD_COUNT: AtomicUsize = ATOMIC_USIZE_INIT;
+
 fn main() {
 
-    let num_runs: i128 = 10000;//std::i128::MAX;
-    let max_number: i128 =10000;//std::i128::MAX;
+    let num_runs: i128 = std::i128::MAX;
+    let max_number: i128 = 100000;//std::i128::MAX;
     // let mut co_primes: i128 = 0;
     let co_primes = Arc::new(Mutex::new(0));
-    let threads: i32 = 4;
+    let threads: i32 = 100;
 
 
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
 
-    for _ in 0..10 {
+    // second number is the number of threads
+    for i in 0..threads {
+        GLOBAL_THREAD_COUNT.fetch_add(1, Ordering::SeqCst);
         let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
-            let mut num = counter.lock().unwrap();
-
-            for _x in 0..10000 {
+            for _x in 0..num_runs/((threads) as i128) {
                 let num_1: i128 = rand::thread_rng().gen_range(1, max_number);
                 let num_2: i128 = rand::thread_rng().gen_range(1, max_number);
                 if num_1.gcd(&num_2) == 1 {
+                    // println!("{}-th thread reporting", i);
+                    let mut num = counter.lock().unwrap();
                     *num +=1;
                 }
             }
+            GLOBAL_THREAD_COUNT.fetch_sub(1, Ordering::SeqCst);
         });
         handles.push(handle);
     }
 
+    while GLOBAL_THREAD_COUNT.load(Ordering::SeqCst) != 0 {
+        thread::sleep(Duration::from_millis(1)); 
+    }
     for handle in handles {
         handle.join().unwrap();
     }
