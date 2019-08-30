@@ -11,7 +11,8 @@ static GLOBAL_THREAD_COUNT: AtomicUsize = ATOMIC_USIZE_INIT;
 
 fn main() {
 
-    let num_runs: i128 = std::i32::MAX as i128;
+    let num_runs: i128 = std::env::args().nth(1).expect("please specify the a valid number (< 2^128) for the number of runs to complete").parse::<i128>().unwrap();
+    // let num_runs: i128 = std::i32::MAX as i128;
     let max_number: i128 = std::i128::MAX;
     // let mut co_primes: i128 = 0;
     // let co_primes = Arc::new(Mutex::new(0));
@@ -34,7 +35,7 @@ fn main() {
                 let num_2: i128 = rand::thread_rng().gen_range(1, max_number);
                 if num_1.gcd(&num_2) == 1 {
                     // println!("{}-th thread reporting", i);
-            
+
                     // println!("{}", (_x as f64 / ((num_runs as f64) / ((threads) as f64))) * 100.0)
                     these_co_primes += 1;
                 }
@@ -42,14 +43,14 @@ fn main() {
             let mut num = co_primes.lock().unwrap();
             *num += these_co_primes;
 
-            
+
             GLOBAL_THREAD_COUNT.fetch_sub(1, Ordering::SeqCst);
         });
         handles.push(handle);
     }
 
     while GLOBAL_THREAD_COUNT.load(Ordering::SeqCst) != 0 {
-        thread::sleep(Duration::from_millis(1)); 
+        thread::sleep(Duration::from_millis(1));
     }
     for handle in handles {
         handle.join().unwrap();
@@ -62,8 +63,8 @@ fn main() {
     println!("pi: {}", pi);
 
 
-    
-}    
+
+}
 
     // let (tx, rx) = mpsc::channel();
 
@@ -78,7 +79,7 @@ fn main() {
     //                 let mut num = co_primes.lock().unwrap();
     //                 *num +=1;
     //                 println!("{}", (_x as f64/ num_runs as f64) * 100.0)
-                        
+
     //             }
     //         }
 
@@ -86,7 +87,7 @@ fn main() {
     //     });
     // }
 
-    
+
     // // for received in rx {
     //     // println!("Got: {}", received);
     //     // let co_primes = co_primes + received;
@@ -96,8 +97,8 @@ fn main() {
     // let mut num = co_primes.lock().unwrap();
 
     // println!("Co primes: {}", num);
- 
-    // // co_primes.lock().unwrap();   
+
+    // // co_primes.lock().unwrap();
     // // let pi: f64 = (6.0/(co_primes as f64 / num_runs as f64)).sqrt();
     // // println!("pi: {}", pi);
 
