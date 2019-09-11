@@ -11,3 +11,19 @@ This was inspired by [[https://youtu.be/RZBhSi_PwHU][this]] video by Matt Parker
 If you like this, you might also be interested in my
 [[https://github.com/jakevossen5/pi-generator-from-blocks][pi-generator-from-blocks]] repository, where I calculate Pi using
 elastic collisions.
+
+** Usage
+
+*** From homebrew
+
+You can install this from [[https://github.com/jakevossen5/homebrew-taps][my homebrew tap]] by running =brew install
+jakevossen5/taps/pi-generator-from-random-numbers]=, then running
+=pi-generator-from-random-numbers RUNS= where =RUNS= is the number of
+iterations that you want.
+
+*** From source
+
+- Clone / download this repository
+- Install [[https://www.rust-lang.org/][rust]]
+- Run with =cargo run RUNS= where RUNS is the number of iterations you
+  want.
