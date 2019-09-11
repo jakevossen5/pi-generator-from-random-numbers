@@ -17,7 +17,7 @@ elastic collisions.
 *** From homebrew
 
 You can install this from [[https://github.com/jakevossen5/homebrew-taps][my homebrew tap]] by running =brew install
-jakevossen5/taps/pi-generator-from-random-numbers]=, then running
+jakevossen5/taps/pi-generator-from-random-numbers, then running
 =pi-generator-from-random-numbers RUNS= where =RUNS= is the number of
 iterations that you want.
 
