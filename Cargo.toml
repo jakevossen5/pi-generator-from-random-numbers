@@ -1,7 +1,7 @@
 [package]
 name = "pi-generator-from-random-numbers"
-version = "0.1.0"
-authors = ["= <jake@vossen.dev>"]
+version = "0.1.1"
+authors = ["Jake Vossen <jake@vossen.dev>"]
 edition = "2018"
 
 [dependencies]
