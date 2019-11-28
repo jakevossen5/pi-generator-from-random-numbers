@@ -5,9 +5,9 @@ use std::sync::{Mutex, Arc};
 use num::Integer;
 use rand::Rng;
 use std::thread;
-use std::sync::atomic::{AtomicUsize, Ordering, ATOMIC_USIZE_INIT};
+use std::sync::atomic::{AtomicUsize, Ordering};
 use std::time::Duration;
-static GLOBAL_THREAD_COUNT: AtomicUsize = ATOMIC_USIZE_INIT;
+static GLOBAL_THREAD_COUNT: AtomicUsize = AtomicUsize::new(0);
 
 fn main() {
 
