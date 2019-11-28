@@ -1,6 +1,6 @@
 [package]
 name = "pi-generator-from-random-numbers"
-version = "2.0.1"
+version = "2.0.2"
 authors = ["Jake Vossen <jake@vossen.dev>"]
 edition = "2018"
 
