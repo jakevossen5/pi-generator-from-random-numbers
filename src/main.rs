@@ -12,6 +12,7 @@ static GLOBAL_THREAD_COUNT: AtomicUsize = AtomicUsize::new(0);
 fn main() {
 
     let num_runs: i128 = std::env::args().nth(1).expect("please specify the a valid number (< 2^127 - 1) for the number of runs to complete").parse::<i128>().unwrap();
+    assert!(num_runs > 0);
     // let num_runs: i128 = std::i32::MAX as i128;
     let max_number: i128 = std::i128::MAX;
     // let mut co_primes: i128 = 0;
